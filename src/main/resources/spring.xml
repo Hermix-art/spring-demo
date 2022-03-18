@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="client"
+          class="com.epam.training.Client">
+        <constructor-arg value="1888"/>
+        <constructor-arg value="Herman Kulik"/>
+    </bean>
+
+    <bean id="app"
+          class="com.epam.training.App">
+        <constructor-arg ref="client"/>
+        <constructor-arg ref="eventLogger"/>
+    </bean>
+
+    <bean id="dateFormatter"
+          class="java.text.DateFormat"
+          factory-method="getDateTimeInstance"/>
+
+    <bean id="eventLogger" class="com.epam.training.ConsoleEventLogger"/>
+
+    <bean id="event" class="com.epam.training.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
+
+</beans>
